@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chó Tuấn 💖</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 2;
+    }
+
+    img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #ff6b81;
+      color: white;
+      transform: scale(1);
+    }
+
+    #noBtn {
+      background: #3498db;
+      color: white;
+    }
+
+    /* full màn hình */
+    .full {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      border-radius: 0;
+      font-size: 40px;
+      z-index: 10;
+    }
+
+    /* hoa rơi */
+    .flower {
+      position: fixed;
+      top: -10px;
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.6;
+      }
+    }
+
+    /* mobile */
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 18px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 10px 18px;
+      }
+
+      #yesBtn.full {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img src="day.jpg" alt="Tuấn">
+    <h2>Tuấn có ngu khônggggggggg???</h2>
+
+    <div class="buttons">
+      <button id="yesBtn">Cực ngu 💖</button>
+      <button id="noBtn">Ngu 😢</button>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
+    let scale = 1;
+
+    // click nút KHÔNG → nút CÓ to dần
+    noBtn.addEventListener("click", () => {
+      scale += 0.3;
+      yesBtn.style.transform = `scale(${scale})`;
+
+      // khi đủ lớn → full màn hình
+      if (scale > 5) {
+        yesBtn.classList.add("full");
+        yesBtn.innerText = "Chó Tuấn 💖";
+      }
+    });
+
+    // click YES luôn thắng 😏
+    yesBtn.addEventListener("click", () => {
+      yesBtn.classList.add("full");
+      yesBtn.innerText = "Chó Tuấn 💖";
+    });
+
+    // tạo hoa rơi
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+
+      const list = ["🌸","🌺","💮"];
+      flower.innerText = list[Math.floor(Math.random() * list.length)];
+
+      flower.style.left = Math.random() * 100 + "vw";
+      flower.style.fontSize = (16 + Math.random() * 20) + "px";
+      flower.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+      document.body.appendChild(flower);
+
+      setTimeout(() => flower.remove(), 8000);
+    }
+
+    setInterval(createFlower, 300);
+  </script>
+
+</body>
+</html>
